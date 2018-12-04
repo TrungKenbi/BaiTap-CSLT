@@ -26,31 +26,22 @@ void xuat(int a[], int n)
 		cout<<"\t"<<a[i];
 	}
 }
-void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
+void HoanVi(int &a, int &b)
 {
-	for(int i = ViTriXoa; i < n; i++)
-	{
-		a[i] = a[i + 1];
-	}
-	n--;
+	int temp = a;
+	a = b;
+	b = temp;
 }
-void XoaCacPhanTuXuatHienNhieuHon1Lan(int a[], int &n)
+void SapXepTangDan(int a[], int n)
 {
 	for(int i = 0; i < n - 1; i++)
 	{
-		int flag = 0;
 		for(int j = i + 1; j < n; j++)
 		{
-			if(a[i] == a[j])
+			if(a[i] > a[j])
 			{
-				Xoa1PhanTu(a, n, j);
-				j--;
-				flag = 1;
+				HoanVi(a[i], a[j]);
 			}
-		}
-		if(flag == 1)
-		{
-			Xoa1PhanTu(a, n, i);
 		}
 	}
 }
@@ -58,11 +49,10 @@ int main()
 {
 	int n;
 	int a[1000];
-	int ViTriXoa;
 	nhap(a, n);
 	xuat(a, n);
-	XoaCacPhanTuXuatHienNhieuHon1Lan(a, n);
-	cout<<"\nMang sau khi xoa tat cac cac gia tri xuat hien nhieu hon 1 lan: ";
+	SapXepTangDan(a, n);
+	cout<<"\nMang sau khi sap xep tang: ";
 	xuat(a, n);
 	return 0;
 }

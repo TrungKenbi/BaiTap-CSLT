@@ -26,43 +26,54 @@ void xuat(int a[], int n)
 		cout<<"\t"<<a[i];
 	}
 }
-void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
+int KiemTraNguyenTo(int n)
 {
-	for(int i = ViTriXoa; i < n; i++)
+	if (n < 2)
 	{
-		a[i] = a[i + 1];
+		return 0;
 	}
-	n--;
-}
-void XoaCacPhanTuXuatHienNhieuHon1Lan(int a[], int &n)
-{
-	for(int i = 0; i < n - 1; i++)
+	else if (n > 2)
 	{
-		int flag = 0;
-		for(int j = i + 1; j < n; j++)
+		if (n % 2 == 0)
 		{
-			if(a[i] == a[j])
+			return 0;
+		}
+		for (int i = 3; i <= sqrt((float)n); i += 2)
+		{
+			if (n % i == 0)
 			{
-				Xoa1PhanTu(a, n, j);
-				j--;
-				flag = 1;
+				return 0;
 			}
 		}
-		if(flag == 1)
+	}
+	return 1;
+}
+int KiemTraMangCoSoNguyenTo(int a[], int n)
+{
+	int flag = 0; 
+	for(int i = 0; i < n; i++)
+	{
+		if(KiemTraNguyenTo(a[i]) == 1)
 		{
-			Xoa1PhanTu(a, n, i);
+			flag = 1;
 		}
 	}
+	return flag;
 }
 int main()
 {
 	int n;
 	int a[1000];
-	int ViTriXoa;
 	nhap(a, n);
 	xuat(a, n);
-	XoaCacPhanTuXuatHienNhieuHon1Lan(a, n);
-	cout<<"\nMang sau khi xoa tat cac cac gia tri xuat hien nhieu hon 1 lan: ";
-	xuat(a, n);
+	int flag = KiemTraMangCoSoNguyenTo(a, n);
+	if(flag == 1)
+	{
+		cout<<"\nMang co so nguyen to";
+	}
+	else
+	{
+		cout<<"\nKhong tim thay";
+	}
 	return 0;
 }

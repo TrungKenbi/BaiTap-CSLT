@@ -6,7 +6,7 @@ void nhap (int a[], int &n)
 {
 	do
 	{
-		cout<<"\nNhap so phan tu: ";
+		cout<<"Nhap so phan tu: ";
 		cin>>n;
 		if(n <= 0 || n > 1000)
 		{
@@ -19,6 +19,7 @@ void nhap (int a[], int &n)
 		cin>>a[i];
 	}
 }
+
 void xuat(int a[], int n)
 {
 	for(int i = 0; i < n; i++)
@@ -26,31 +27,25 @@ void xuat(int a[], int n)
 		cout<<"\t"<<a[i];
 	}
 }
-void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
+void HoanVi(int &a, int &b)
 {
-	for(int i = ViTriXoa; i < n; i++)
-	{
-		a[i] = a[i + 1];
-	}
-	n--;
+	int temp = a;
+	a = b;
+	b = temp;
 }
-void XoaCacPhanTuXuatHienNhieuHon1Lan(int a[], int &n)
+void SapXepChanLeTangDanNhungViTriTuongDoiGiuaCacSoKoThayDoi(int a[], int n)
 {
 	for(int i = 0; i < n - 1; i++)
 	{
-		int flag = 0;
-		for(int j = i + 1; j < n; j++)
+		if(a[i] > 0)
 		{
-			if(a[i] == a[j])
+			for(int j = i + 1; j < n; j++)
 			{
-				Xoa1PhanTu(a, n, j);
-				j--;
-				flag = 1;
+				if(((a[i] % 2 == 0 && a[j] % 2 == 0) || (a[i] % 2 != 0 && a[j] % 2 != 0)) && a[i] > a[j])
+				{
+					HoanVi(a[i], a[j]);
+				}
 			}
-		}
-		if(flag == 1)
-		{
-			Xoa1PhanTu(a, n, i);
 		}
 	}
 }
@@ -58,11 +53,10 @@ int main()
 {
 	int n;
 	int a[1000];
-	int ViTriXoa;
 	nhap(a, n);
 	xuat(a, n);
-	XoaCacPhanTuXuatHienNhieuHon1Lan(a, n);
-	cout<<"\nMang sau khi xoa tat cac cac gia tri xuat hien nhieu hon 1 lan: ";
+	SapXepChanLeTangDanNhungViTriTuongDoiGiuaCacSoKoThayDoi(a, n);
+	cout<<"\nMang sau khi sap xep chan le tang dan\n nhung vi tri tuong doi giua cac so ko thay doi: ";
 	xuat(a, n);
 	return 0;
 }

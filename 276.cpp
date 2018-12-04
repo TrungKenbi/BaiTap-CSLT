@@ -15,7 +15,7 @@ void nhap (int a[], int &n)
 	}while(n <= 0 || n > 1000);
 	for(int i = 0; i < n; i++)
 	{
-		cout<<"Nhap a["<<i<<"]: "<< i;
+		cout<<"Nhap a["<<i<<"]: "<<i;
 		cin>>a[i];
 	}
 }
@@ -23,7 +23,7 @@ void xuat(int a[], int n)
 {
 	for(int i = 0; i < n; i++)
 	{
-		cout<<"\t"<<a[i];
+		cout<<"\t"<< a[i];
 	}
 }
 void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
@@ -34,23 +34,14 @@ void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
 	}
 	n--;
 }
-void XoaCacPhanTuXuatHienNhieuHon1Lan(int a[], int &n)
+void XoaCacPhanTuTrungVoiX(int a[], int &n, int x)
 {
-	for(int i = 0; i < n - 1; i++)
+	for(int i = 0; i < n; i++)
 	{
-		int flag = 0;
-		for(int j = i + 1; j < n; j++)
-		{
-			if(a[i] == a[j])
-			{
-				Xoa1PhanTu(a, n, j);
-				j--;
-				flag = 1;
-			}
-		}
-		if(flag == 1)
+		if((a[i]) == x)
 		{
 			Xoa1PhanTu(a, n, i);
+			i--;
 		}
 	}
 }
@@ -58,11 +49,13 @@ int main()
 {
 	int n;
 	int a[1000];
-	int ViTriXoa;
+	int ViTriXoa, x;
 	nhap(a, n);
 	xuat(a, n);
-	XoaCacPhanTuXuatHienNhieuHon1Lan(a, n);
-	cout<<"\nMang sau khi xoa tat cac cac gia tri xuat hien nhieu hon 1 lan: ";
+	cout<<"Nhap x: ";
+	cin>>x;
+	XoaCacPhanTuTrungVoiX(a, n, x);
+	cout<<"\nMang sau khi xoa tat cac cac gia tri trung voi : "<<x;
 	xuat(a, n);
 	return 0;
 }

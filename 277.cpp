@@ -34,23 +34,36 @@ void Xoa1PhanTu(int a[], int &n, int ViTriXoa)
 	}
 	n--;
 }
-void XoaCacPhanTuXuatHienNhieuHon1Lan(int a[], int &n)
+int KiemTraNguyenTo(int n)
 {
-	for(int i = 0; i < n - 1; i++)
+	if (n < 2)
 	{
-		int flag = 0;
-		for(int j = i + 1; j < n; j++)
+		return 0;
+	}
+	else if (n > 2)
+	{
+		if (n % 2 == 0)
 		{
-			if(a[i] == a[j])
+			return 0;
+		}
+		for (int i = 3; i <= sqrt((float)n); i += 2)
+		{
+			if (n % i == 0)
 			{
-				Xoa1PhanTu(a, n, j);
-				j--;
-				flag = 1;
+				return 0;
 			}
 		}
-		if(flag == 1)
+	}
+	return 1;
+}
+void XoaCacSoNguyenTo(int a[], int &n)
+{
+	for(int i = 0; i < n; i++)
+	{
+		if(KiemTraNguyenTo(a[i]) == 1)
 		{
 			Xoa1PhanTu(a, n, i);
+			i--;
 		}
 	}
 }
@@ -61,8 +74,8 @@ int main()
 	int ViTriXoa;
 	nhap(a, n);
 	xuat(a, n);
-	XoaCacPhanTuXuatHienNhieuHon1Lan(a, n);
-	cout<<"\nMang sau khi xoa tat cac cac gia tri xuat hien nhieu hon 1 lan: ";
+	XoaCacSoNguyenTo(a, n);
+	cout<<"\nMang sau khi xoa tat cac cac gia tri nguyen to: ";
 	xuat(a, n);
 	return 0;
 }
